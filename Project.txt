@@ -1,0 +1,68 @@
+1.	Schéma logique de données
+1.1	Sujet : [Agence de voyage]
+1.2 Schéma logique de données 
+Définir ou générer un schéma logique de la base de données  avec au moins 7 tables:  
+•	Prendre en compte dans cette phase les règles de gestion de type contraintes d'intégrités (de domaine : check/not null, d’entité : primary key/unique key, de référence : foreign key) 
+•	Définir au moins un trigger pour assurer l’intégrité des données ne pouvant être prise en charge par les contraintes d’intégrités du modèle relationnel
+<réponses et trace ici>
+
+2. Organisation physique de la base sous Oracle 11g
+En partant du schéma logique définit précédemment, vous procédérez dans cette étape à l’organisation physique de la base de données. 
+Vous devez donc assurerer les tâches suivantes : 
+•    Créer les tablespaces suivants et expliquer leur intérêt: 
+Un ou plusieurs tabespaces pour stocker les données des tables. 
+Un ou plusieurs tablespaces pour stocker les données d’indexes 
+Un tablespace pour stocker les segments temporaires. 
+Note  :  Tous  vos  tablespaces  seront  gérés  localement.  Ils  seront  en  mode AUTOALLOCATE ou UNIFORM SIZE. Vous devez expliquer l’intérêt et les bénéfices de vos choix. 
+<réponses et trace ici> 
+
+•    Créer  un  utilisateur  de  votre  choix  qui  sera  propriétaire  de  votre application.  Les  segments  temporaires  doivent  être  localisés  dans  le  tablespace approprié créé précédement. Vous devez lui donner les droits appropriés. 
+<réponses et trace ici>
+
+•    Créer le schéma de données en séparant les données des tables et les index  
+<réponses et trace ici>
+
+      - Vous dimensionnerez de façon pertinente les segments. Pour cela vous devez utiliser le package DBMS_SPACE pour estimer la volumétrie de vos tables et de vos indexes afin de trouver le volume de données nécessaire dès la création Étape d'Administration
+        de ces segments. Il est important d’estimer le nombre total de lignes de chacune de vos tables 
+        <réponses et trace ici> 
+        
+      - Insérer pour l’instant en moyenne une dizaine de lignes de test dans chacune des tables. 
+        <réponses et trace ici>
+
+3. Étape d'Administration
+3.1 Sqlloader 
+Ecrire un script (fichier de contrôle SQLLOADER) qui permet de charger les lignes contenues dans un fichier CSV (ligne à construire dans EXCEL) vers une ou plusieurs de vos tables. Les données sont à préparer auparavant. 
+<réponses et trace ici> 
+
+3.2 Divers requêtes 
+1) Ecrire une requête SQL qui permet de visualiser l’ensemble des fichiers qui composent votre base <réponses et trace ici> 
+2) Ecrire une requête SQL qui permet de lister en une requête l’ensembles des tablespaces avec leur fichiers. La taille de chaque fichier doit apparaître, le volume total de l’espace occupé par fichier ainsi que le volume total de l’espace libre par fichier 
+<réponses et trace ici> 
+3) Ecrire une requête SQL qui permet de lister les segments et leurs extensions de chacun des segments (tables ou indexes) de votre utilisateur <réponses et trace ici>
+4) Ecrire une requête qui permet pour chacun de vos segments de donner le nombre total de blocs du segment, le nombre  de blocs utilisés et le nombre de blocs libres 
+<réponses et trace ici> 
+5) Ecrire une requête SQL qui permet de compacter et réduire un segment 
+<réponses et trace ici> 
+6) Ecrire une requête qui permet d’afficher l’ensemble des utilisateurs de votre base et leurs droits 
+<réponses et trace ici> 
+7) Proposer trois requêtes libres au choix de recherche d’objets dans le dictionnaire Oracle 
+<réponses et trace ici>
+
+3.3 Mise en place d'une stratégie de sauvegarde et restauration (voir le chap. 6 du cours ADB1) 
+Mettez  en  place  une  stratégie  de  sauvegarde  et  restauration,  basée  sur  le  mode avec archives. Votre stratégie doit décrire la politique de sauvegarde et restauration des fichiers suivant leur type(périodicité des backups des fichiers de données / du spfile / des fichiers d’archives / du fichier de contrôle, duplications des fichiers de contrôles ou rédo, etc). Utililser l’outil Oracle Recovery Manager pour la mettre en œuvre. 
+Ecrirte pour cela un script de sauvegarde qui permet sous RMAN : 
+-    D’arrêter la base 
+-    De sauvegarder les fichiers de données 
+-    De sauvergarder les fichiers d’archives - De sauvegarder le SPFILE 
+-    De sauvegarder les fichiers de contrôle 
+<réponses et trace ici> 
+
+3.4 Provoquer deux pannes au moins
+Provoquer deux pannes au moins et y remedier grâce à votre stratégie de sauvegarde. Les pannes peuvent être :
+-    La perte de fichiers de données 
+-    La perte de fichiers de contrôles. 
+<réponses et trace ici>
+
+3.5 Export / import 
+Vous devez transporter les données d’un de vos utilisateurs d’une base vers une autre. Les deux bases peuvent être la même. Faire le nécessaire en utilisant export et import afin que cela fonctionne.  
+<réponses et trace ici>
